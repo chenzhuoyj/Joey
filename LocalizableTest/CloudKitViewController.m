@@ -12,16 +12,18 @@
 #define nameCode @"code"
 @interface CloudKitViewController () <CLLocationManagerDelegate>
 
-@property (nonatomic,strong) CLLocationManager *locationManager;
-@property (nonatomic,strong) CLLocation *currentLocation;
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) CLLocation *currentLocation;
 
-@property (nonatomic,strong) UITextView *textView;
+@property (nonatomic, strong) UITextView *textView;
 
-@property (nonatomic,strong) UITextField *textField;
+@property (nonatomic, strong) UITextField *textField;
 
-@property (nonatomic,strong) CKDatabase *db;
+//@property (nonatomic, strong) UITableView *tableView;
 
-@property (nonatomic,strong) CKRecord *record;
+@property (nonatomic, strong) CKDatabase *db;
+
+@property (nonatomic, strong) CKRecord *record;
 @end
 
 @implementation CloudKitViewController
@@ -58,9 +60,15 @@
     self.textField.borderStyle = UITextBorderStyleRoundedRect;
     [self.view addSubview:self.textField];
     if ([[NSUserDefaults standardUserDefaults] valueForKey:nameCode]) {
-//        self.textField.enabled = NO;
         self.textField.text = [[NSUserDefaults standardUserDefaults] valueForKey:nameCode];
     }
+    
+//    self.tableView = [UITableView new];
+//    self.tableView.frame = CGRectZero;
+//    self.tableView.dataSource = self;
+//    self.tableView.delegate = self;
+//    [self.view addSubview:self.tableView];
+    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     [button setTitle:@"Locate" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(getLocation) forControlEvents:UIControlEventTouchUpInside];
@@ -90,12 +98,12 @@
 }
 
 - (void)getLocation {
+//    [self.tableView reloadData];
     if (self.textField.text.length <= 0) {
         return;
     } else {
         [[NSUserDefaults standardUserDefaults] setValue:self.textField.text forKey:nameCode];
-//        self.textField.enabled = NO;
-    }
+        }
     if (!self.locationManager) {
         self.locationManager = [[CLLocationManager alloc]init];
         _locationManager.delegate = self;

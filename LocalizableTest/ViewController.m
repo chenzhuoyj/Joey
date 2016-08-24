@@ -46,12 +46,63 @@ static NSString *identifier = @"cell";
                   @"Map",
                   @"Umeng Share",
                   @"Authentication",
-                  @"Split"];
+                  @"Split"];    
 }
+
+//-(void)myLog{
+//    NSLog(@"MyLog");
+//}
+//-(int)myLog:(int)a parm:(int)b parm:(int)c{
+//    NSLog(@"MyLog%d:%d:%d",a,b,c);
+//    return a+b+c;
+//}
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
+//    SEL myMethod2 = @selector(myLog);
+//    SEL myMethod = @selector(myLog:parm:parm:);
+//    NSMethodSignature * sig  = [[self class] instanceMethodSignatureForSelector:myMethod];
+//    NSInvocation * invocatin = [NSInvocation invocationWithMethodSignature:sig];
+//    [invocatin setTarget:self];
+//    [invocatin setSelector:myMethod];
+//    ViewController * view = self;
+//    int a=1;
+//    int b=2;
+//    int c=3;
+//    [invocatin setArgument:&view atIndex:0];
+//    [invocatin setArgument:&myMethod atIndex:1];
+//    [invocatin setArgument:&a atIndex:2];
+//    [invocatin setArgument:&b atIndex:3];
+//    [invocatin setArgument:&c atIndex:4];
+//    [invocatin retainArguments];
+//    
+////    [invocatin invoke];
+//
+////    //我们将c的值设置为返回值
+////    [invocatin setReturnValue:&c];
+//    int d;
+//    //取这个返回值
+//    [invocatin getReturnValue:&d];
+//    NSLog(@"%d",d);
+    
+    //1.创建一个其他队列
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    //2.创建NSBlockOperation对象
+    NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
+        NSLog(@"%@", [NSThread currentThread]);
+    }];
+    
+    //3.添加多个Block
+    for (NSInteger i = 0; i < 5; i++) {
+        [operation addExecutionBlock:^{
+            NSLog(@"第%ld次：%@", i, [NSThread currentThread]);
+        }];
+    }
+    
+    //4.队列添加任务
+    [queue addOperation:operation];
 }
 
 - (void)didReceiveMemoryWarning {

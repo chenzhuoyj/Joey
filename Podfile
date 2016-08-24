@@ -7,7 +7,9 @@ target 'LocalizableTest' do
     pod 'IQKeyboardManager'
     pod 'Masonry'
     pod 'SafeKit'
+    pod 'libextobjc'
     pod 'UMengSocialCOM'
     pod 'Bugly'
+    pod 'BaiduMapKit'
 end
 inhibit_all_warnings!

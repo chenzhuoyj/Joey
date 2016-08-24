@@ -26,8 +26,8 @@
     self.title = @"WebView";
     self.edgesForExtendedLayout = UIRectEdgeNone;
     //    @"https://www.baidu.com"
-//    self.homeUrl = [NSURL URLWithString:@"https://www.baidu.com"];
-    self.homeUrl = [NSURL URLWithString:@"http://192.168.1.40:8080/www/jsios.html"];
+    self.homeUrl = [NSURL URLWithString:@"http://www.baidu.com"];
+//    self.homeUrl = [NSURL URLWithString:@"http://192.168.1.40:8080/www/jsios.html"];
     [self configUI];
 }
 
@@ -70,11 +70,6 @@
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.homeUrl]];
     
-//    UILabel *label = [UILabel new];
-//    label.frame = CGRectMake(0, 0, 100, 40);
-//    label.backgroundColor = [UIColor redColor];
-//    [self.webView insertSubview:label belowSubview:self.webView.scrollView];
-
 }
 
 - (void)configColseItem {
